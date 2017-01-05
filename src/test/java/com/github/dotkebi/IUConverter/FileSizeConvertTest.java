@@ -36,7 +36,8 @@ public class FileSizeConvertTest {
         if (length > FileSizeType.values().length * 3) {
             targetLength += 3;
         }
-        return String.valueOf(source).substring(0, targetLength);
+        source = Long.parseLong(String.valueOf(source).substring(0, targetLength));
+        return String.format("%,d", source);
     }
 
 }

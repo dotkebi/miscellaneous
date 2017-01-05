@@ -13,7 +13,7 @@ public class FileSizeConverter {
             unit = FileSizeType.values()[unit.ordinal() + 1];
         }
 
-        return String.format("%d%s", source, unit.getUnit());
+        return String.format("%,d%s", source, unit.getUnit());
     }
 
 }
