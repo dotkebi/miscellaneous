@@ -11,8 +11,11 @@ public class FileSizeConvertTest {
 
     @Test
     public void convertTest() {
+        assertThat(948L, "B");
+        assertThat(3948L, "KB");
         assertThat(394838934L, "MB");
-        assertThat(139434242424L, "GB");
+        assertThat(1394342424L, "GB");
+        assertThat(13943424233424L, "TB");
         assertThat(13948389224342424L, "PB");
         assertThat(139483892243242424L, "PB");
         assertThat(1394838922434242424L, "PB");

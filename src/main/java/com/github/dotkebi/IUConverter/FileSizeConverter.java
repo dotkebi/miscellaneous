@@ -8,7 +8,7 @@ public class FileSizeConverter {
     public static String convert(long source) {
         FileSizeType unit = FileSizeType.BYTE;
 
-        while (String.valueOf(source).length() > 4 || unit.ordinal() > FileSizeType.values().length) {
+        while (String.valueOf(source).length() > 3 && unit.ordinal() + 1 < FileSizeType.values().length) {
             source = (long) Math.floor(source / FileSizeType.convert);
             unit = FileSizeType.values()[unit.ordinal() + 1];
         }
