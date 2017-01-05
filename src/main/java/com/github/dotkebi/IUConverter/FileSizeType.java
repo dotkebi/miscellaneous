@@ -12,7 +12,8 @@ public enum FileSizeType {
     , PETABYTE("PB")
     ;
 
-    public static final int convert = 1000;
+    public static final int CONVERT = 1000;
+    public static final int CONVERT_LENGTH = String.valueOf(CONVERT).length() - 1;
 
     private String unit;
 
