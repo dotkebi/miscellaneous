@@ -1,7 +1,7 @@
 package com.github.dotkebi.IUConverter;
 
 /**
- * @author by myoungjin on 2017-01-05.
+ * @author by dotkebi@gmail.com on 2017-1-5.
  */
 public enum FileSizeType {
     BYTE("B")
