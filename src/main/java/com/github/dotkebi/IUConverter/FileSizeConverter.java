@@ -6,7 +6,11 @@ package com.github.dotkebi.IUConverter;
 public class FileSizeConverter {
 
     public static String convert(long source) {
-        FileSizeType unit = FileSizeType.BYTE;
+        return convert("%,d%s", source);
+    }
+
+    public static String convert(String numberFormat, double source) {
+        FileSizeType unit = getInitialSizeType();
 
         while (String.valueOf(source).length() > FileSizeType.CONVERT_LENGTH
                 && unit.ordinal() + 1 < FileSizeType.values().length) {
@@ -14,7 +18,11 @@ public class FileSizeConverter {
             unit = FileSizeType.values()[unit.ordinal() + 1];
         }
 
-        return String.format("%,d%s", source, unit.getUnit());
+        return String.format(numberFormat, source, unit.getUnit());
+    }
+
+    public static FileSizeType getInitialSizeType() {
+        return FileSizeType.BYTE;
     }
 
 }
