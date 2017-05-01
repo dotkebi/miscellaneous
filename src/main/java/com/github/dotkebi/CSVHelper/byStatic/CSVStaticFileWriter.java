@@ -1,6 +1,4 @@
-package com.github.dotkebi.CSVHelper.implement;
-
-import com.github.dotkebi.CSVHelper.CSVWritable;
+package com.github.dotkebi.CSVHelper.byStatic;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,16 +8,16 @@ import java.util.List;
 /**
  * @author by dotkebi@gmail.com on 2017-04-24.
  */
-public class CSVFileWriter implements CSVWritable {
+public class CSVStaticFileWriter {
 
-    public void convert(List<?> datas, String name) {
+    public static void convert(List<?> datas, String name) {
         if (!name.endsWith(".csv")) {
             name += ".csv";
         }
 
         File file = new File(name);
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
-            write(fileOutputStream, transform(datas));
+            EntityToCSVConvert.write(fileOutputStream, datas);
         } catch (IOException e) {
             e.printStackTrace();
         }

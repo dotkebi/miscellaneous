@@ -1,12 +1,13 @@
 package com.github.dotkebi.CSVHelper;
 
-import com.github.dotkebi.CSVHelper.implement.CSVFileWriter;
+import com.github.dotkebi.CSVHelper.byInterface.CSVFileWriter;
+import com.github.dotkebi.CSVHelper.byStatic.CSVStaticFileWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,17 @@ import java.util.List;
 @SpringBootTest(classes = TestApplication.class)
 public class CSVTest {
 
+    @Autowired
+    private CSVFileWriter csvFileWriter;
+
     @Test
-    public void writeTest() {
-        CSVFileWriter csvFileWriter = new CSVFileWriter();
+    public void writeByStaticTest() {
+        CSVStaticFileWriter.convert(getTestData(), "test");
+
+    }
+
+    @Test
+    public void writeByInterfaceTest() {
         csvFileWriter.convert(getTestData(), "test");
 
     }

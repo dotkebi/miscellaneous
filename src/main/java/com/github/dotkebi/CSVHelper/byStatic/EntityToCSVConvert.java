@@ -1,5 +1,6 @@
-package com.github.dotkebi.CSVHelper;
+package com.github.dotkebi.CSVHelper.byStatic;
 
+import com.github.dotkebi.CSVHelper.CSVConstants;
 import com.opencsv.CSVWriter;
 
 import java.io.IOException;
@@ -12,9 +13,29 @@ import java.util.List;
 /**
  * @author by dotkebi@gmail.com on 2017-04-24.
  */
-public interface CSVWritable {
+public class EntityToCSVConvert {
 
-    default List<String[]> transform(List<?> objects) {
+    public static void write(OutputStream outputStream, List<?> sources) {
+        List<String[]> datas = transform(sources);
+
+        try (
+                CSVWriter writer = new CSVWriter(new OutputStreamWriter(outputStream), ',', CSVWriter.NO_QUOTE_CHARACTER)
+        ) {
+            //add BOM
+            outputStream.write(CSVConstants.UTF8_BOM.getBytes());
+            writer.writeAll(datas);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static List<String[]> transform(List<?> objects) {
         List<String[]> dataToWrite = new ArrayList<>();
         if (objects.size() == 0) {
             return dataToWrite;
@@ -45,7 +66,7 @@ public interface CSVWritable {
         return dataToWrite;
     }
 
-    default String[] makeHeader(Class title) {
+    private static String[] makeHeader(Class title) {
         Field[] fields = title.getDeclaredFields();
         String[] columns = new String[fields.length];
 
@@ -55,24 +76,6 @@ public interface CSVWritable {
             ++i;
         }
         return columns;
-    }
-
-    default void write(OutputStream outputStream, List<String[]> datas) {
-        try (
-                CSVWriter writer = new CSVWriter(new OutputStreamWriter(outputStream), ',', CSVWriter.NO_QUOTE_CHARACTER)
-        ) {
-            //add BOM
-            outputStream.write(CSVConstants.UTF8_BOM.getBytes());
-            writer.writeAll(datas);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 }
