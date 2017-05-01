@@ -1,7 +1,7 @@
 package com.github.dotkebi.IUConverter;
 
 /**
- * @author by dotkebi@gmail.com on 2017-2-12.
+ * @author by dotkebi@gmail.com on 2017-01-05.
  */
 public enum SizeType {
     BIT("B")
